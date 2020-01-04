@@ -1,15 +1,11 @@
-const Joi = require('joi');
-const mysql = require('mysql');
-
-
 const express = require('express');
 const app = express();
-
 module.exports.app = app;
 
 app.use(express.json());
 
 const databaseConnection = require('./controllers/db_connection');
+
 
 databaseConnection.instance;
 databaseConnection.connect;
@@ -23,6 +19,7 @@ const termin_route = require('./routes/termin');
 const uzytkownik_route = require('./routes/uzytkownik');
 const wiadomosc_route = require('./routes/wiadomosc');
 const zwierze_route = require('./routes/zwierze');
+const logger_route = require('./routes/logger');
 
 
 
