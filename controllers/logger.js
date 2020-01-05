@@ -49,7 +49,7 @@ module.exports.register = (req,res) => {
         login: Joi.string().alphanum().min(3).max(30).required(),
         haslo: Joi.string().min(7).max(30).required(),
         nick: Joi.string().min(3).max(30).required(),
-        numerTelefonu: Joi.number().min(9),
+        numerTelefonu: Joi.number().min(999999999).max(999999999),
         email: Joi.string().email({minDomainAtoms: 2}).required()
     });
 
