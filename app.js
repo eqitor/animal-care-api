@@ -20,37 +20,8 @@ const uzytkownik_route = require('./routes/uzytkownik');
 const wiadomosc_route = require('./routes/wiadomosc');
 const zwierze_route = require('./routes/zwierze');
 const logger_route = require('./routes/logger');
-
-
-
-
-
-/*
-app.post('/api/courses', (req, res) => {
-
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-
-    const result = Joi.validate(req.body, schema);
-    console.log(result);
-
-    if(result.error){
-        // 400 Bad Request
-        res.status(400).send(result.error);
-        return;
-    }
-
-    const course = {
-        id : courses.length + 1,
-        name : req.body.name
-    };
-
-    courses.push(course);
-    res.send(course);
-
-})
-*/
+const views_route = require('./routes/views');
+const procedures_route = require('./routes/procedures');
 
 
 
