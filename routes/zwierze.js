@@ -8,3 +8,6 @@ app.app.get('/api/zwierze', controller.get_all);
 
 app.app.get('/api/zwierze/:id', controller.get_by_id);
 
+app.app.delete('/api/zwierze/:id', controller.delete_by_id);
+
+app.app.post('api/zwierze', controller.add);
