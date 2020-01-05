@@ -22,7 +22,7 @@ const zwierze_route = require('./routes/zwierze');
 const logger_route = require('./routes/logger');
 const views_route = require('./routes/views');
 const procedures_route = require('./routes/procedures');
-
+const general_route = require('./routes/general');
 
 
 const server = app.listen(8080, () => {
