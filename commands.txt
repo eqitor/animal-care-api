@@ -1,0 +1,29 @@
+KOMENDY
+
+GET      /api/general/get_advertisement_info                zwraca wszystkie ogłoszenia z lokalzacja
+
+GET      /api/general/get_advertisement_info/:id            zwraca ogłoszenie z lokalizacją o podanym id
+
+GET      /api/general/get_deadline_of_advertisement/:id     zwraca terminy ogłoszenia o id
+
+GET      /api/general/get_animals_of_user/:id               zwraca zwierzęta usera o id
+
+GET      /api/general/get_animals_of_advertisement/:id      zwraca zwierzęta ogłoszenia o id
+
+GET      /api/general/get_advertisements_of_user/:id        zwraca ogłoszenia usera o id
+
+GET      /api/general/get_offers_of_advertisement/:id       zwraca oferty złożone do ogłoszenia o id
+
+GET      /api/general/get_offers_to_user/:id                zwraca oferty złożone userowi o id
+
+--logowanie i rejestracja
+
+GET     /api/logger/login/:login/:password                 loguje użytkownika
+
+DELETE  /api/logger/logout/:login                          wylogowuje użytkownika
+
+DELETE  /api/logger/remove                                 usuwa użytkownika z bazy danych
+
+GET     /api/logger/validate/:login                        sprawdza czy użytkownik jest zalogowany
+
+POST    /api/logger/register                               dodaje użytkownika do bazy danych
