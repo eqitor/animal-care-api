@@ -8,3 +8,6 @@ app.app.get('/api/opieka', controller.get_all);
 
 app.app.get('/api/opieka/:id', controller.get_by_id);
 
+app.app.delete('/api/opieka/:id', controller.delete_by_id);
+
+app.app.post('api/opieka', controller.add);
