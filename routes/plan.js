@@ -10,4 +10,4 @@ app.app.get('/api/plan/:id', controller.get_by_id);
 
 app.app.delete('/api/plan/:id', controller.delete_by_id);
 
-app.app.post('api/plan', controller.get.add);
+app.app.post('api/plan', controller.add);

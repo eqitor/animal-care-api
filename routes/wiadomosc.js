@@ -10,4 +10,4 @@ app.app.get('/api/wiadomosc/:id', controller.get_by_id);
 
 app.app.delete('/api/wiadomosc/:id', controller.delete_by_id);
 
-app.app.add('api/wiadomosc', controller.add);
+app.app.post('api/wiadomosc', controller.add);

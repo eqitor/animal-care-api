@@ -1,5 +1,5 @@
 //importing instances of controllers funtions
-var controller = require('../controllers/ogloszenie');
+var controller = require('../controllers/uzytkownik');
 
 //importing app instance
 var app = require('../app');
