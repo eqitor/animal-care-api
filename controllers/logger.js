@@ -10,11 +10,13 @@ module.exports.login = (req,res) => {
 
     db.instance.query(query, (err,rows,fields) => {
         if(rows == ''){
-            res.status(404).send("Invalid login or password.");
+            res.status(404).send({resultCode : 404,
+                                  message : "Invalid login or password."});
             return;
         }
         if(loggedUsers.loggedUsers.is_logged(rows)){
-            res.status(404).send("User is already logged in.");
+            res.status(404).send({resultCode : 404,
+                                  message : "User is already logged in."});
             return;
         }
         else{   
@@ -28,17 +30,20 @@ module.exports.login = (req,res) => {
 module.exports.logout = (req,res) => {
 
     loggedUsers.loggedUsers.remove_user(req.params.login);
-    res.send('User has been logged out.');
+    res.send({resultCode : 200,
+              message : 'User has been logged out.'});
 };
 
 module.exports.validate = (req,res) => {
 
     if(loggedUsers.loggedUsers.is_logged(req.params.login)){
-        res.status(200).send(`User ${req.params.login} is logged in.`);
+        res.status(200).send({resultCode : 200,
+                              message : `User ${req.params.login} is logged in.`});
         return;
     }
     else{
-        res.status(404).send(`User ${req.params.login} is not logged in.`);
+        res.status(404).send({resultCode : 404,
+                              message : `User ${req.params.login} is not logged in.`});
         return;
     }
 };
@@ -49,7 +54,7 @@ module.exports.register = (req,res) => {
         login: Joi.string().alphanum().min(3).max(30).required(),
         haslo: Joi.string().min(7).max(30).required(),
         nick: Joi.string().min(3).max(30).required(),
-        numerTelefonu: Joi.number().min(999999999).max(999999999),
+        numerTelefonu: Joi.number().min(99999999).max(999999999),
         email: Joi.string().email({minDomainAtoms: 2}).required()
     });
 
@@ -59,7 +64,8 @@ module.exports.register = (req,res) => {
 
     if(result.error){
         // 400 Bad Request
-        res.status(400).send(`Validation error occured: ${result.error.details[0].message}`);
+        res.status(400).send({resultCode : 400,
+                              message : `Validation error occured: ${result.error.details[0].message}`});
         return;
     }
     
@@ -79,7 +85,8 @@ module.exports.register = (req,res) => {
     db.instance.query(query, (err, rows, fields) => {
       
         if(!(rows == undefined || rows.toString() == '')){
-            res.status(400).send('User already exists in current database.');
+            res.status(400).send({resultCode : 400,
+                                  message : 'User already exists in current database.'});
         }
         else {
             
@@ -88,11 +95,13 @@ module.exports.register = (req,res) => {
             
             db.instance.query(insert_query, (err,rows,fields) => {
                 if(err){
-                    res.status(400).send(`Database error occured: ${err}`);
+                    res.status(400).send({resultCode : 400,
+                                          message :`Database error occured: ${err}`});
                     return;
                 }
                 else{
-                    res.status(200).send(`User added: ${JSON.stringify(new_user)}`);
+                    res.status(200).send({resultCode : 200,
+                                          message : `User added.`});
                     console.log(`New user added: ${new_user.login}`);
                 }
             })
@@ -118,7 +127,8 @@ module.exports.remove_user = (req, res) =>{
 
     if(result.error){
         // 400 Bad Request
-        res.status(400).send(`Validation error occured: ${result.error.details[0].message}`);
+        res.status(400).send({resultCode : 400,
+                              message : `Validation error occured: ${result.error.details[0].message}`});
         return;
     }
 
@@ -128,7 +138,8 @@ module.exports.remove_user = (req, res) =>{
     db.instance.query(query, (err, rows, fields) => {
 
         if(rows === undefined || rows.toString() == ''){
-            res.status(400).send('User doesn\'t exists.');
+            res.status(400).send({resultCode : 400,
+                                  message : 'User doesn\'t exists.'});
         }
         else {
             
@@ -137,11 +148,13 @@ module.exports.remove_user = (req, res) =>{
             
             db.instance.query(insert_query, (err,rows,fields) => {
                 if(err){
-                    res.status(400).send(`Database error occured: ${err}`);
+                    res.status(400).send({resultCode : 400,
+                                          message : `Database error occured: ${err}`});
                     return;
                 }
                 else{
-                    res.status(200).send(`User removed: ${JSON.stringify(req.body)}`);
+                    res.status(200).send({resultCode : 200,
+                                          message : `User removed.`});
                     console.log(`User removed: ${req.body.login}`);
                 }
             })
