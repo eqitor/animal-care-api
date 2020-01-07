@@ -27,3 +27,27 @@ DELETE  /api/logger/remove                                 usuwa użytkownika z 
 GET     /api/logger/validate/:login                        sprawdza czy użytkownik jest zalogowany
 
 POST    /api/logger/register                               dodaje użytkownika do bazy danych
+
+
+--tabele
+
+GET     /api/<nazwa tabeli>                                zwraca tabele <nazwa tabeli>
+
+GET     /api/<nazwa tabeli>/:id                            zwraca rekord tabeli <nazwa tabeli> o podanym id
+
+DELETE  /api/<nazwa tabeli>/:id                            usuwa rekord z tabeli <nazwa tabeli> !!! NIE DZIAŁA Z OFERTĄ !!!
+
+POST    /api/<nazwa tabeli>                                dodaje rekord do tabeli
+
+--> przykład: /api/ogloszenie/1
+
+--views
+
+GET     /api/view/:view_param                              zwraca widok view_param !!! NAZWA WIDOKU MUSI BYĆ W APOSTROFACH !!!
+
+--> przykład /api/view/'Ogloszenia'
+
+--procedures
+
+GET     /api/db_procedure/:procedure_param                 zwraca wynik procedury procedure_param, TEŻ APOSTROFY!
+--> przykład /api/db_procedure/'zlozone_ogloszenia(7)'
