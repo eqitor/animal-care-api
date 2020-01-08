@@ -6,7 +6,7 @@ var loggedUsers = require('../contents/logged_users');
 module.exports.login = (req,res) => {
 
     let query = `SELECT * FROM Uzytkownik
-                 WHERE login = ${req.params.login} AND haslo = ${req.params.password}`;
+                 WHERE login = '${req.body.login}' AND haslo = '${req.body.password}'`;
 
     db.instance.query(query, (err,rows,fields) => {
         if(rows == ''){
@@ -15,8 +15,7 @@ module.exports.login = (req,res) => {
             return;
         }
         if(loggedUsers.loggedUsers.is_logged(rows)){
-            res.status(404).send({resultCode : 404,
-                                  message : "User is already logged in."});
+            res.send(rows);
             return;
         }
         else{   

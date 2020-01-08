@@ -4,7 +4,7 @@ var controller = require('../controllers/logger');
 //importing app instance
 var app = require('../app');
 
-app.app.get('/api/logger/login/:login/:password',controller.login);
+app.app.post('/api/logger/login',controller.login);
 
 app.app.delete('/api/logger/logout/:login',controller.logout);
 
