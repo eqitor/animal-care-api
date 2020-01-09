@@ -51,6 +51,16 @@ module.exports.delete_by_id = (req, res) => {
     })
 };
 
+module.exports.get_by_user = (req, res) => {
+    let query = `SELECT * FROM Zwierze WHERE Uzytkownik_idUzytkownik = '${req.params.id}`
+    db.instance.query(query, (err, rows, fields) => {
+        if (err) {
+            res.status(400).send(`error: ${err}`);
+        }
+        else res.send(rows);
+    })
+}
+
 //adding new element of Zwierze table
 module.exports.add = (req, res) => {
 
