@@ -60,20 +60,20 @@ module.exports.add_whole = (req, res) => {
         err1 = err;
         if (err) return;
         else {
-            let query2 = `INSERT INTO Ogloszenie (tresc, dataPrzyjecia, dataAkceptacji, idLokalizacja) SELECT '${req.body.content}', '${req.body.addedDate}', '${req.body.acceptedDate}', MAX(idLokalizacja) FROM Lokalizacja`;
+            let query2 = `INSERT INTO Ogloszenie (tresc, dataPrzyjecia, dataAkceptacji, Lokalizacja_idLokalizacja) SELECT '${req.body.content}', '${req.body.addedDate}', '${req.body.acceptedDate}', MAX(idLokalizacja) FROM Lokalizacja`;
             mysqlConnection.query(query2, (err, rows, fields) => {
                 err2 = err;
                 if (err) return;
                 else {
                     var animals = req.body.animals;
                     for (var animal of animals) {
-                        mysqlConnection.query(`INSERT INTO Opieka (idZwierze, idOgloszenie) SELECT '${animal}', MAX(idOgloszenie) FROM Ogloszenie`, (err, rows, fields) => {
+                        mysqlConnection.query(`INSERT INTO Opieka (Zwierze_idZwierze, Ogloszenie_idOgloszenie) SELECT '${animal}', MAX(idOgloszenie) FROM Ogloszenie`, (err, rows, fields) => {
                             err3 = err;
                             if (err) return
                             else {
                                 var terms = req.body.terms
                                 for (var term of terms) {
-                                    mysqlConnection.query(`INSERT INTO Termin (data, idOgloszenie) SELECT '${term}', MAX(idOgloszenie) FROM Ogloszenie`, (err, rows, fields) => {
+                                    mysqlConnection.query(`INSERT INTO Termin (data, Ogloszenie_idOgloszenie) SELECT '${term}', MAX(idOgloszenie) FROM Ogloszenie`, (err, rows, fields) => {
                                         err4 = err;
                                         if (err) return;
                                     })
