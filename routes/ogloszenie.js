@@ -11,3 +11,5 @@ app.app.get('/api/ogloszenie/:id', controller.get_by_id);
 app.app.delete('/api/ogloszenie/:id', controller.delete_by_id);
 
 app.app.post('/api/ogloszenie', controller.add);
+
+app.app.post('/api/ogloszenie/add_whole', controller.add_whole);

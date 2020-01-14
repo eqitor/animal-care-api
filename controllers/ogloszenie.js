@@ -103,3 +103,41 @@ module.exports.add = (req, res) => {
         }
     })
 };
+
+module.exports.add_whole = (req, res) => {
+    var addedDate = parseInt(req.body.addedTimeStamp) / 1000;
+    var expiredDate = parseInt(req.body.expiredTimeStamp) / 1000;
+    
+    var err1, err2, err3;
+    let query1 = `INSERT INTO Lokalizacja (kodPocztowy, miasto) VALUES ('${req.body.localisation.postCode}', '${req.body.localisation.city}')`;
+    db.instance.query(query1, (err, rows, fields) => {
+        err1 = err;
+        if (err) {console.log(" 1 " + err); return;}
+        else {
+            let query2 = `INSERT INTO Ogloszenie (tytul, tresc, dataPrzyjecia, dataWygasniecia, Lokalizacja_idLokalizacja) SELECT '${req.body.title}', '${req.body.content}', FROM_UNIXTIME('${addedDate}'), FROM_UNIXTIME('${expiredDate}'), MAX(idLokalizacja) FROM Lokalizacja`;
+            db.instance.query(query2, (err, rows, fields) => {
+                err2 = err;
+                if (err) {console.log(" 2 " + err); return;}
+                else {
+                    var animals = req.body.animals;
+                    for (var animal of animals) {
+                        db.instance.query(`INSERT INTO Opieka (Zwierze_idZwierze, Ogloszenie_idOgloszenie) SELECT '${animal}', MAX(idOgloszenie) FROM Ogloszenie`, (err, rows, fields) => {
+                            err3 = err;
+                            if (err) {console.log(" 3 " + err); return;}
+                            else {
+                                var terms = req.body.terms
+                                for (var term of terms) {
+                                    db.instance.query(`INSERT INTO Termin (data, Ogloszenie_idOgloszenie) SELECT FROM_UNIXTIME('${parseInt(term) / 1000}'), MAX(idOgloszenie) FROM Ogloszenie`, (err, rows, fields) => {
+                                        err4 = err;
+                                        if (err) {console.log(" 4 " + err); return;}
+                                    })
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    })
+    res.status(200).send(`ok`);
+};

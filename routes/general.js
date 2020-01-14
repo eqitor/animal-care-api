@@ -19,3 +19,4 @@ app.app.get('/api/general/get_advertisements_of_user/:id', controller.get_advert
 app.app.get('/api/general/get_offers_of_advertisement/:id',controller.get_offers_of_advertisement);
 
 app.app.get('/api/general/get_offers_to_user/:id', controller.get_offers_to_user);
+
